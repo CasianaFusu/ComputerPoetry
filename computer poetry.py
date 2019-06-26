@@ -15,11 +15,10 @@ def plotWordFrequency(input):
     plt.ylabel('Numărul de apariții:', fontsize=18)
     plt.title('Cele mai folosite cuvinte: %s' % (artist_file), fontsize=24)
     plt.show()
-    
 artist_file = 'poezii_compus.txt'
 plotWordFrequency(artist_file)
 
-
+#############################################################################################################
 import markovify
 import re
 import random
@@ -30,7 +29,7 @@ from keras.models import Sequential
 from keras.layers import LSTM 
 from keras.layers.core import Dense
 
-
+#############################################################################################################
 def create_network(depth):           
   model = Sequential()
   model.add(LSTM(4, input_shape=(2, 2), return_sequences=True))   
@@ -45,14 +44,14 @@ def create_network(depth):
     print("loading saved network: " + str(artist) + ".poezie") 
   return model
   
+#############################################################################################################
+def markov(text_file):
+colectie_de_poezii = open(text_file, "r", encoding='utf-8').read()
+text_model = markovify.NewlineText(colectie_de_poezii, state_size = 2)     
+return text_model
   
-  def markov(text_file):
-  colectie_de_poezii = open(text_file, "r", encoding='utf-8').read()
-  text_model = markovify.NewlineText(colectie_de_poezii, state_size = 2)     
-  return text_model
-  
-  
-  #voc="aeiouy"
+#############################################################################################################  
+#voc="aeiouy"
 #cons="bcdfghjklmnprstvxz"
 #cc_o=["ch", "gh", "sp", "sc", "st", "sf", "zb", "zg", "zd", "zv", "jg", "jd", "sm", "sn", "sl", "zm", "zl", "jn", "tr", "cl", "cr", "pl", "pr", "dr", "gl", "gr", "br", "bl", "fl", "fr", "vl", "vr", "hr", "hl", "ml", "mr"]
 #ccc_o=["spl", "spr", "str", "jgh", "zdr", "scl", "scr", "zgl", "zgr", "sfr"]
@@ -199,8 +198,8 @@ def syllCuv(cuv):
                     i=i+2
     return len(cuv.split('-'))
   
-  
-  import json
+############################################################################################################# 
+import json
 
 qRime = json.load(open("Rimeq.txt"))
 wRime = json.load(open("Rimew.txt"))
@@ -366,7 +365,7 @@ def lista_rime(cuvant):
           return aaqRime[cuvantAdaptat]
   return []
 
-
+#############################################################################################################
 def split_lyrics_file(text_file):
   text = open(text_file, encoding='utf-8').read()
   text = text.split("\n")
@@ -375,7 +374,7 @@ def split_lyrics_file(text_file):
   print(type(text[0]))
   return text
 
-
+#############################################################################################################
 def build_dataset(lines, rhyme_list):
   print(lines)
   dataset = []
@@ -402,7 +401,7 @@ def build_dataset(lines, rhyme_list):
   y_data = np.array(y_data)
   return x_data, y_data
 
-
+#############################################################################################################
 def rhyme(line, rhyme_list):
   word = re.sub(r"\W+", '', line.split(" ")[-1]).lower() 
   rhymeslist = lista_rime(word)
@@ -421,7 +420,7 @@ def rhyme(line, rhyme_list):
     float_rhyme = 0
     return float_rhyme
 
-
+#############################################################################################################
 def rhymeindex(lyrics):
   if str(artist) + ".rime" in os.listdir(".") and train_mode == False:
     return open(str(artist) + ".rime", "r",encoding='utf-8').read().split("\n")
@@ -450,7 +449,7 @@ def rhymeindex(lyrics):
       f.close()
       return rhymelist
 
-
+#############################################################################################################
 def train(x_data, y_data, model):  
 	model.fit(np.array(x_data), np.array(y_data),
 			  batch_size=2,
@@ -458,7 +457,7 @@ def train(x_data, y_data, model):
 			  verbose=1, validation_split = 0.2)
 	model.save_weights(artist + ".poezie")
 
-
+#############################################################################################################
 def vectors_into_poetry(vectors, generated_lyrics, rhyme_list):
   print ("\n\n")	
   print ("Poezie:")
@@ -519,7 +518,7 @@ def vectors_into_poetry(vectors, generated_lyrics, rhyme_list):
         break     
   return poetry
 
-
+#############################################################################################################
 def main(depth, train_mode):
   model = create_network(depth)  
   text_model = markov(text_file)  
@@ -538,7 +537,7 @@ def main(depth, train_mode):
     count_rhymes(poetry)
     count_syll(poetry)
 
-
+#############################################################################################################
 def count_rhymes(poetry):
   rime=0
   cuvinte_rime = []
@@ -619,7 +618,7 @@ def count_syll(poetry):
   media = count/len(poetry)
   print(str(media) + " silabe/vers")
 
-
+#############################################################################################################
 depth = 4 
 artist = "artist"
 model_file = "artist.poezie"
@@ -628,11 +627,13 @@ poetry_file = "out.txt"
 maxsyllables = 10
 maxverses =  10
 
-
+#############################################################################################################
+#### use this if you want to train the network
 train_mode = True       
 main(depth, train_mode)
 
-
+#############################################################################################################
+#### use this if you have the pre-trained model uploaded
 train_mode = False
 main(depth, train_mode)
 
