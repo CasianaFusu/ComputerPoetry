@@ -20,7 +20,7 @@ Using the new created Notebook, you need to install [Markovify](https://github.c
 ```
 Upload the data set and the files for rhymes in the current file system. We recommand to upload them in /content, in order to not be forced to change any path in the code. 
 
-Next step is to import and run all the functions using the notebook. Keep in mind that it's very important to run all the functions before trying to use them.
+Next step is to import and run all the functions from computer_poetry.py to the notebook. Keep in mind that it's very important to run all the functions before trying to use them.
 
 ## Contribution
 
