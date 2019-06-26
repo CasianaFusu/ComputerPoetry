@@ -1,5 +1,4 @@
 # ComputerPoetry
-"Can a computer write poetry?" 
 
 This project proposes a Romanian based application developed by using both probabilistic and recurrent neural network models. The goal is to generate a text with metrical constraints (rhyme, number of syllables), that can be read as poetry. The idea of the system came from [GhostWriter](http://www.emnlp2015.org/proceedings/EMNLP/pdf/EMNLP221.pdf). Many of the functions used were adapted from [here](https://www.kaggle.com/paultimothymooney/poetry-generator-rnn-markov/notebook) and [here](https://github.com/mary-octavia/Syllabification.git). I also made available the data set that we used for training, the current rhyme dictionary and a pre-trained model.
 
