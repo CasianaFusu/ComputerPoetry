@@ -19,3 +19,8 @@ Using the new created Notebook, you need to install [Markovify](https://github.c
 ! pip install markovify
 ```
 
+Next step is to import and run all the functions in the notebook. Keep in mind that it's very important to run all the functions before trying to use them.
+
+## Contribution
+
+This is still under development and because we believe in the power of ideas, the project is open to contributions.
